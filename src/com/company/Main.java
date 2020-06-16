@@ -13,7 +13,7 @@ public class Main {
             for (Bill bill : atm.getBills()) {
                 totalBills += bill.getQuantity();
             }
-            System.out.println("Totali banconote: " + totalBills);
+            System.out.println("Total bills: " + totalBills);
 
             for (Bill bill : atm.getBills()) {
                 System.out.println(bill.getName() + ": " + bill.getQuantity());
