@@ -7,30 +7,25 @@ public class Main {
     public static void main(String[] args) {
         ATM atm = new ATM();
 
-        while (true) {
+        while (true) {                                                             //main while: "new withdrawal?"
 
-            int totalBills = 0;
-            for (Bill bill : atm.getBills()) {
-                totalBills += bill.getQuantity();
-            }
+            int totalBills = atm.countBills();                                     //show the quantity of all bills
             System.out.println("Total bills: " + totalBills);
 
-            for (Bill bill : atm.getBills()) {
+            for (Bill bill : atm.getBills()) {                                     //show the quantity of evry kind bills
                 System.out.println(bill.getName() + ": " + bill.getQuantity());
             }
 
-            int totalAmount = 0;
-            for (Bill bill : atm.getBills()) {
-                totalAmount += bill.getValue() * bill.getQuantity();
-            }
+            int totalAmount = atm.getTotalAvailable();                             //show the amount of money available in the ATM
             System.out.println("Total Amount: " + totalAmount);
+
             boolean checkInput = false;
             int withdrawal = 0;
-            while (checkInput == false) {
-                checkInput = true;
-                String input = JOptionPane.showInputDialog("withdrawal?");
+            while (checkInput == false) {                                           //while loop: to avoid unavailable input format
+                checkInput = true;                                                  //(string or double for exemple)
+                String input = JOptionPane.showInputDialog("withdrawal?");          //out from the loop only if the input is correct
 
-                if (input == null){
+                if (input == null){                                                 //cancel, x --> System.exit
                     System.out.println("bye bye");
                     System.exit(0);
                 }
@@ -38,28 +33,26 @@ public class Main {
                     withdrawal = Integer.parseInt(input);
                 } catch (NumberFormatException e) {
                     System.out.println("Input not allowed");
-                    checkInput = false;
+                checkInput = false;                                                 //exception --> false --> another loop
                 }
             }
-            Response checkAvalaibility = atm.checkAvailability(withdrawal);
-            if (!checkAvalaibility.getStatus()) {
+            Response checkAvalaibility = atm.checkAvailability(withdrawal);         //withdrawal is not allowed:
+            if (!checkAvalaibility.getStatus()) {                                   //a different message for every different case
                 System.out.println(checkAvalaibility.getMessage());
                 System.out.println();
             }
             else {
-                atm.withdraw(withdrawal);
+                atm.withdraw(withdrawal);                                           //show message and the new total amount
+                System.out.println(checkAvalaibility.getMessage());
                 System.out.println("New Total Amount: " + atm.getTotalAvailable());
                 System.out.println();
             }
 
-            int exitCheck = JOptionPane.showConfirmDialog(null, "Would you like to continue?");
-            if (exitCheck!=0) {
-                System.out.println("bye bye");
+            int exitCheck = JOptionPane.showConfirmDialog(null, "Another withdrawal?");
+            if (exitCheck!=0) {                                                     //yes --> another loop
+                System.out.println("bye bye");                                      //no, cancel, X --> system.exit
                 System.exit(0);
             }
-
-
-
         }
     }
 }

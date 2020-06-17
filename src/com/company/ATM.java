@@ -61,10 +61,9 @@ public class ATM {
     }
 
 
-//--------------------------------------
-
+//--------------------------------------Service/Repository methods
     public void charging() {
-        this.thousand = new Bill("Thousand", 1000, 2);          //laddning det ska hända från en method
+        this.thousand = new Bill("Thousand", 1000, 2);
         this.fiveHundred = new Bill("Five hundred", 500, 3);
         this.hundred = new Bill("Hundred", 100, 5);
         this.bills = new ArrayList<>();
@@ -87,10 +86,13 @@ public class ATM {
     }
 
     public Response checkAvailability(int withdrawal){
+        if (withdrawal<0)
+            return new Response("no negative input, please", false);
         if (withdrawal> totalAvailable)
             return new Response("amount not available", false);
         if ((withdrawal % 100) != 0)
             return new Response("amount not payable", false);
+
 
         int withdrawalHundreds = getLastThreeDigits(withdrawal);
         int ATMTotalHundred = hundred.getValue() * hundred.getQuantity();
@@ -148,6 +150,15 @@ public class ATM {
         String lastTreeDigitsAsString = withdrawalAsString.substring(withdrawalAsString.length() - 3);
         int lastTreeDigitsAsInt = Integer.parseInt(lastTreeDigitsAsString);
         return lastTreeDigitsAsInt;
+    }
+
+    public int countBills(){
+        int totalBills = 0;
+        for (Bill bill : getBills()) {
+            totalBills += bill.getQuantity();
+        }
+        return totalBills;
+
     }
 
 }
