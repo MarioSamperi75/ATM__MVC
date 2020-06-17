@@ -145,7 +145,7 @@ public class ATM {
     }
 
 
-    public int getLastThreeDigits(int withdrawal) { // att fixa
+    public int getLastThreeDigits(int withdrawal) {
         String withdrawalAsString =  Integer.toString(withdrawal);
         String lastTreeDigitsAsString = withdrawalAsString.substring(withdrawalAsString.length() - 3);
         int lastTreeDigitsAsInt = Integer.parseInt(lastTreeDigitsAsString);
