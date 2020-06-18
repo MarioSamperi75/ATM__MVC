@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ATM {
 
 //--------------------------------------
 
-    public int getTotalAvailable() {
+    public int getTotalAmountAvailable() {
         return totalAvailable;
     }
 
