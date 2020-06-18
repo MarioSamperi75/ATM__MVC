@@ -90,8 +90,8 @@ public class Repository {
         int left = withdrawal;
 
         while (left>=1000) {                                            //is the remaining part of withdrawal > 1000?
-            if (thousand.getQuantity() > 0) {                           //is there any 1000 bill?
-                thousand.setQuantity(thousand.getQuantity() - 1);       //"eliminate" a 1000 bill
+            if (thousand.getQuantity() > 0) {                           //is there any thousand-bill?
+                thousand.setQuantity(thousand.getQuantity() - 1);       //"eliminate" a thousand-bill
                 left -= 1000;                                           // subtracts 1000 from the remaining part
             } else if (fiveHundred.getQuantity() > 0) {
                 fiveHundred.setQuantity(fiveHundred.getQuantity() - 1);
