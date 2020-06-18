@@ -1,55 +1,53 @@
 package com.company.Controller;
 
-import com.company.Model.ATM;
+import com.company.Model.Repository;
 import com.company.Model.Response;
 
 public class Controller {
-    private ATM atm;
+    private Repository repository;
+
 
     public Controller() {
-        this.atm = new ATM();
+        this.repository = new Repository();
     }
 
-    public ATM getAtm() {
-        return atm;
+    public Repository getRepository() {
+        return repository;
     }
 
-    public void setAtm(ATM atm) {
-        this.atm = atm;
+    public void setRepository(Repository repository) {
+        this.repository = repository;
     }
 
     public int getTotalAmountAvailable(){
-        int totalAmountAvailable = atm.getTotalAmountAvailable();
-        return totalAmountAvailable;
+        return repository.getTotalAmountAvailable();
     }
 
     public int getTotalBillsQuantity(){
-        int billsAmount = atm.countBills();
-        return billsAmount;
+        return repository.countBills();
     }
 
     public int getThousandBillsQuantity(){
-        int thousandBillsQuantity = atm.getThousand().getQuantity();
-        return thousandBillsQuantity;
+        return repository.getThousandBillsQuantity();
     }
 
 
     public int getFiveHundredBillsQuantity() {
-        int fiveHundredBillsQuantity = atm.getFiveHundred().getQuantity();
-        return fiveHundredBillsQuantity;
+        return repository.getFiveHundredBillsQuantity();
     }
 
     public int getHundredBillsQuantity() {
-        int hundredBillsQuantity = atm.getHundred().getQuantity();
-        return hundredBillsQuantity;
+        return repository.getHundredBillsQuantity();
     }
 
+
+
     public Response checkAvailability(int withdrawal){
-        Response response= atm.checkAvailability(withdrawal);
+        Response response= repository.checkAvailability(withdrawal);
         return response;
     }
 
     public void withdraw(int withdrawal){
-        atm.withdraw(withdrawal);
+        repository.withdraw(withdrawal);
     }
 }
